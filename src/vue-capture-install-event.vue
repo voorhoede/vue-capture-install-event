@@ -9,7 +9,7 @@ export default {
   name: 'CaptureInstallEvent',
   props: {
     /**
-      * Tha tag that the component should be rendered as
+      * The tag that the component should be rendered as
      */
     tag: {
       type: String,

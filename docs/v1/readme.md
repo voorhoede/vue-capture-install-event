@@ -67,4 +67,4 @@ Vue.use(VueCaptureInstallEvent)
 
 - `tag` ***String*** (*optional*) `default: 'div'` 
 
-  Tha tag that the component should be rendered as 
+  The tag that the component should be rendered as 

@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" v-if="installEvent" @click="executeInstallEvent">
+  <component :is="tag" v-if="show" @click="executeInstallEvent">
     <slot />
   </component>
 </template>
@@ -18,31 +18,26 @@ export default {
   },
   data() {
     return {
-      installEvent: null,
-      beforeinstallpromptEventListener: null,
-      appinstalledEventListener: null,
+      show: false,
     }
   },
   mounted() {
-    window.addEventListener('beforeinstallprompt', this.saveInstallPrompt, true)
-    window.addEventListener('appinstalled', this.clearInstallPrompt, true)
+    window.addEventListener('beforeinstallprompt', this.onInstallable, true)
+    window.addEventListener('appinstalled', this.onInstall, true)
   },
   destroyed() {
-    window.removeEventListener('beforeinstallprompt', this.saveInstallPrompt, true)
-    window.removeEventListener('appinstalled', this.clearInstallPrompt, true)
+    window.removeEventListener('beforeinstallprompt', this.onInstallable, true)
+    window.removeEventListener('appinstalled', this.onInstall, true)
   },
   methods: {
     executeInstallEvent() {
-      if (this.installEvent) {
-        this.installEvent.prompt()
-      }
+      this.$installEvent.prompt()
     },
-    saveInstallPrompt(event) {
-      event.preventDefault()
-      this.installEvent = event
+    onInstallable() {
+      this.show = true
     },
-    clearInstallPrompt() {
-      this.installEvent = null
+    onInstall() {
+      this.show = false
     },
   },
 }

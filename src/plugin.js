@@ -1,15 +1,16 @@
 // Import vue component
-import component from './vue-capture-install-event.vue';
-
-window.VCIE_installEvent = null
+import VueCaptureInstallEvent from './vue-capture-install-event.vue';
 
 // install function executed by Vue.use()
 function install(Vue) {
   if (install.installed) return;
   install.installed = true;
-  Vue.component('VueCaptureInstallEvent', component);
+  Vue.component('VueCaptureInstallEvent', VueCaptureInstallEvent);
+
+  Vue.prototype.$installEvent = null
 
   window.addEventListener('beforeinstallprompt', (event) => {
+    Vue.prototype.$installEvent = event
     event.preventDefault()
   }, true)
 }

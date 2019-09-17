@@ -32,6 +32,21 @@ export default {
   methods: {
     executeInstallEvent() {
       this.$installEvent.prompt()
+
+      this.$installEvent.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            /**
+             * Emitted when the prompt is accepted by the user
+             */
+            this.$emit('installed')
+          } else {
+            /**
+             * Emitted when the prompt is dismissed by the user
+             */
+            this.$emit('dismissed')
+          }
+        });
     },
     onInstallable() {
       this.show = true

@@ -49,8 +49,22 @@ Vue.use(VueCaptureInstallEvent)
   <source src="./img/pwa-example.mp4" type="video/mp4">
 </video>
 
+### Default usage
+
 ::: demo
 <vue-capture-install-event><button>Install this PWA</button></vue-capture-install-event>
+:::
+
+### Render as tag
+
+::: demo
+<vue-capture-install-event tag="button">Install this PWA</vue-capture-install-event>
+:::
+
+### Listen for user action
+
+::: demo
+<vue-capture-install-event @installed="onInstalled" @dismissed="onDismissed"><button>Install this PWA</button></vue-capture-install-event>
 :::
 
 <!-- The API section is auto generated, don't touch please -->
